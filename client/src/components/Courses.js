@@ -14,14 +14,14 @@ class Courses extends Component{
     getCourses = () => {
         axios.get('http://localhost:5000/api/courses')
         .then(res => {
-            this.setState(res.data);
+            this.setState(res.data);          
         })
         .catch(err => {
             console.log('Error', err)
         });
     };
 
-    render() {
+    render() {        
         return (
             <div className="bounds">
                 {this.state.courses.map(course => (
