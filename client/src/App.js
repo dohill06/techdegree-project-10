@@ -2,8 +2,7 @@ import React from 'react';
 import {
     BrowserRouter,
     Route,
-    Switch,
-    Redirect
+    Switch
 } from 'react-router-dom';
 
 
@@ -16,8 +15,7 @@ const App = () => (
         <div>
             <Header />
             <Switch>
-                <Route exact path='/' render={() => <Redirect to='/courses' /> } />
-                <Route exact path='/courses' component={Courses} />
+                <Route exact path='/' component={Courses} />
             </Switch>
         </div>
     </BrowserRouter>
