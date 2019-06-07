@@ -9,6 +9,7 @@ import {
 
 import Header from './components/Header';
 import Courses from './components/Courses';
+import CourseDetail from './components/CourseDetail';
 
 const App = () => (
     <BrowserRouter>
@@ -16,6 +17,7 @@ const App = () => (
             <Header />
             <Switch>
                 <Route exact path='/' component={Courses} />
+                <Route exact path='/courses/:id' component={CourseDetail} />
             </Switch>
         </div>
     </BrowserRouter>
