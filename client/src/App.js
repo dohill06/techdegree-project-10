@@ -2,7 +2,8 @@ import React from 'react';
 import {
     BrowserRouter,
     Route,
-    Switch
+    Switch,
+    Redirect
 } from 'react-router-dom';
 
 
@@ -15,7 +16,8 @@ const App = () => (
         <div>
             <Header />
             <Switch>
-                <Courses />
+                <Route exact path='/' render={() => <Redirect to='/courses' /> } />
+                <Route exact path='/courses' component={Courses} />
             </Switch>
         </div>
     </BrowserRouter>
