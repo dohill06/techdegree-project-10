@@ -14,7 +14,9 @@ const App = () => (
     <BrowserRouter>
         <div>
             <Header />
-            <Courses />
+            <Switch>
+                <Courses />
+            </Switch>
         </div>
     </BrowserRouter>
 );
