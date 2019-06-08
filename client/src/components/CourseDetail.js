@@ -60,10 +60,8 @@ class CourseDetail extends Component {
                                     <h3>{this.state.course.estimatedTime}</h3>
                                 </li>
                                 <li className="course--stats--list--item">
-                                    <h4>Materials Needed</h4>
-                                    <ul>
-                                        <ReactMarkdown source={this.state.course.materialsNeeded} />
-                                    </ul>
+                                    <h4>Materials Needed</h4>                                   
+                                    <ReactMarkdown source={this.state.course.materialsNeeded} />                                    
                                 </li>
                             </ul>
                         </div>
