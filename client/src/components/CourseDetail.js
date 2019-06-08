@@ -22,8 +22,6 @@ class CourseDetail extends Component {
                 course: res.data.course,
                 user: `${res.data.course.User.firstName} ${res.data.course.User.lastName}`
             });
-            console.log(res.data);
-            console.log(this.state);
         })
     };
 
