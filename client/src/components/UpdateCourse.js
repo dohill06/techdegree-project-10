@@ -44,7 +44,7 @@ class UpdateCourse extends Component {
                         </div>
                         <div className="grid-100 pad-bottom">
                             <button className="button" type="submit">Update Course</button>
-                            <button className="button button-secondary" onclick="event.preventDefault(); location.href='course-detail.html';">Cancel</button>
+                            <Link className="button button-secondary" to={`/courses/${this.props.match.params.id}`}>Cancel</Link>
                         </div>
                     </form>
                 </div>
