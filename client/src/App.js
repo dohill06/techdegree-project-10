@@ -14,6 +14,7 @@ import UserSignIn from './components/UserSignIn';
 import UserSignUp from './components/UserSignUp';
 import CreateCourse from './components/CreateCourse';
 import UpdateCourse from './components/UpdateCourse';
+import UserSignOut from './components/UserSignOut';
 
 const App = () => (
     <BrowserRouter>
@@ -26,6 +27,7 @@ const App = () => (
                 <Route exact path='/courses/:id' component={CourseDetail} />
                 <Route path='/signin' component={UserSignIn} />
                 <Route path='/signup' component={UserSignUp} />
+                <Route path='/signout' component={UserSignOut} />
             </Switch>
         </div>
     </BrowserRouter>
