@@ -3,6 +3,11 @@ import {Link} from 'react-router-dom';
 
 class UserSignIn extends Component {
 
+
+    onChange = e => {
+        console.log(e.target.value, e.target.id);
+    }
+
     render() {
         return (
             <div className="bounds">
@@ -11,7 +16,7 @@ class UserSignIn extends Component {
                     <div>
                         <form>
                             <div>
-                                <input id="emailAddress" name="emailAddress" type="text" className="" placeholder="Email Address" value="" />
+                                <input id="emailAddress" name="emailAddress" type="text" className="" placeholder="Email Address" onChange={this.onChange} />
                             </div>
                             <div>
                                 <input id="password" name="password" type="password" className="" placeholder="Password" value="" />
