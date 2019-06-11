@@ -20,7 +20,7 @@ class CourseDetail extends Component {
         .then(res => {
             const { course } = res.data;
             this.setState({
-                course: course,
+                course,
                 user: `${course.User.firstName} ${course.User.lastName}`
             });
         })
