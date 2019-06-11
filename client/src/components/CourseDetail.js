@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import axios from 'axios';
 
@@ -18,9 +18,10 @@ class CourseDetail extends Component {
     getCourse = () => {
         axios.get(`http://localhost:5000/api${this.props.match.url}`)
         .then(res => {
+            const { course } = res.data;
             this.setState({
-                course: res.data.course,
-                user: `${res.data.course.User.firstName} ${res.data.course.User.lastName}`
+                course: course,
+                user: `${course.User.firstName} ${course.User.lastName}`
             });
         })
     };

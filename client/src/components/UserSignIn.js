@@ -5,7 +5,7 @@ class UserSignIn extends Component {
 
 
     onChange = e => {
-        console.log(e.target.value, e.target.id);
+        console.log(e.target.value, e.target.name);
     }
 
     render() {
@@ -16,10 +16,10 @@ class UserSignIn extends Component {
                     <div>
                         <form>
                             <div>
-                                <input id="emailAddress" name="emailAddress" type="text" className="" placeholder="Email Address" onChange={this.onChange} />
+                                <input id="emailAddress" name="emailAddress" type="text" placeholder="Email Address" onChange={this.onChange} />
                             </div>
                             <div>
-                                <input id="password" name="password" type="password" className="" placeholder="Password" value="" />
+                                <input id="password" name="password" type="password" placeholder="Password" onChange={this.onChange} />
                             </div>
                             <div className="grid-100 pad-bottom">
                                 <button className="button" type="submit">Sign In</button>
