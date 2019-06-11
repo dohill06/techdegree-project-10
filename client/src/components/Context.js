@@ -6,7 +6,7 @@ export const Context = React.createContext();
 export class Provider extends Component {
     state = {
         user: {}
-    }
+    };
 
     signIn = (emailAddress, password) => {
         axios.get('http://localhost:5000/api/users', {
@@ -16,12 +16,13 @@ export class Provider extends Component {
             }
         }).then(res => {
             console.log(res)
+            console.log(res.status)
         })
     };
 
     render() {
         return (
-            <Context.Provider value{{
+            <Context.Provider value={{
                 user: this.state.user,
                 actions: {
                     signIn: this.signIn
