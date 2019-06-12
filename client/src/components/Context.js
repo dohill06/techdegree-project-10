@@ -15,7 +15,13 @@ export class Provider extends Component {
                 password
             }
         }).then(res => {
-            console.log(res)
+            this.setState({
+                user: {
+                    ...res.data,
+                    password
+                }
+            });
+            console.log(this.state)
             console.log(res.status)
         })
     };
