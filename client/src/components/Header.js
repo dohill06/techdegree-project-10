@@ -5,7 +5,7 @@ import { Consumer } from './Context';
 const Header = () => {
     return (
         <Consumer>
-            {({ user }) => (
+            {({ actions, user }) => (
                 <>
                 <div className="header">
                     <div className="bounds">
@@ -14,7 +14,7 @@ const Header = () => {
                         {user.id ? (
                             <>
                             <span>{`Welcome ${user.firstName} ${user.lastName}`}</span>
-                            <Link className="signin" to='/signout'>Sign Out</Link>
+                            <Link className="signin" to='/signout' onClick={actions.signOut}>Sign Out</Link>
                             </>
                         ) : (
                             <>

@@ -26,12 +26,19 @@ export class Provider extends Component {
         })
     };
 
+    signOut = () => {
+        this.setState({
+            user: {}
+        });
+    };
+
     render() {
         return (
             <Context.Provider value={{
                 user: this.state.user,
                 actions: {
-                    signIn: this.signIn
+                    signIn: this.signIn,
+                    signOut: this.signOut
                 }
             }}>
             {this.props.children}
