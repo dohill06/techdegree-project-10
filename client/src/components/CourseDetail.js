@@ -28,6 +28,22 @@ class CourseDetail extends Component {
         })
     };
 
+    deleteCourse = (user) => {
+        const { emailAddress, password } = user;
+        axios({
+            method: 'delete',
+            url: `http://localhost:5000/api/courses/${this.state.course.id}`,
+            auth: {
+                username: emailAddress,
+                password
+            }
+        }).then(() => {
+            this.props.history.push('/');
+        }).catch(err => {
+            console.log(err);
+        });
+    };
+
     render() {
         return (
             <div>
@@ -40,7 +56,7 @@ class CourseDetail extends Component {
                                 ? (
                                     <span>
                                         <Link className="button" to={`/courses/${this.state.course.id}/update`}>Update Course</Link>
-                                        <Link className="button" to="delete-course.html">Delete Course</Link>
+                                        <button className="button" onClick={() => this.deleteCourse(user)}>Delete Course</button>
                                     </span>
                                 ) : (
                                     ''
