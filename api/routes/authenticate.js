@@ -13,7 +13,7 @@ module.exports = (req, res, next) => {
                     emailAddress: credentials.name
                 }
             })
-            .then(function (user) {
+            .then(user => {
                 if (user) {
                     const authenticated = bcryptjs
                         .compareSync(credentials.pass, user.password);

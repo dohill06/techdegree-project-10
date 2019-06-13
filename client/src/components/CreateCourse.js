@@ -25,7 +25,10 @@ class CreateCourse extends Component {
             password,
             id
         } = user;
-        axios.post('http://localhost:5000/api/courses', {
+        console.log(emailAddress)
+        axios({
+            method: 'post',
+            url: 'http://localhost:5000/api/courses',
             auth: {
                 username: emailAddress,
                 password
