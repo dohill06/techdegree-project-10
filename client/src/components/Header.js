@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { Consumer } from './Context';
 
-const Header = () => {
+const Header = (props) => {
     return (
         <Consumer>
             {({ actions, user }) => (
@@ -19,7 +19,7 @@ const Header = () => {
                         ) : (
                             <>
                             <Link className="signup" to='/signup'>Sign Up</Link>
-                            <Link className="signin" to='/signin'>Sign In</Link>
+                            <Link className="signin" to={{pathname: '/signin', state: { from: props.location }}}>Sign In</Link>
                             </>
                         )}
                         </nav>
@@ -32,4 +32,4 @@ const Header = () => {
     )
 }
 
-export default Header;
+export default withRouter(Header);
