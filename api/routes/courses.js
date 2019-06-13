@@ -154,7 +154,7 @@ router.put('/:id', authenticateUser, (req, res, next) => {
 });
 // Delete course with authentication
 router.delete('/:id', authenticateUser, (req, res, next) => {
-    const input = req.body;
+    const input = req.params;
 
     Course.findOne({
         where: {
