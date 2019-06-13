@@ -1,9 +1,19 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { Consumer } from './Context';
 import axios from 'axios';
 
 
 class CreateCourse extends Component {
+
+
+    onChange = e => {
+    const { name, value } = e.target;
+    // this.setState({
+    //     [name]: value
+    // });
+    console.log(name, value);
+    };
 
     render() {
         return (
@@ -24,13 +34,13 @@ class CreateCourse extends Component {
                             <div className="course--header">
                                 <h4 className="course--label">Course</h4>
                                 <div>
-                                    <input id="title" name="title" type="text" className="input-title course--title--input" placeholder="Course title..." value=""/>
+                                    <input id="title" name="title" type="text" className="input-title course--title--input" placeholder="Course title..." onChange={this.onChange}/>
                                 </div>
                                 <p>By Joe Smith</p>
                             </div>
                             <div className="course--description">
                                 <div>
-                                    <textarea id="description" name="description" className="" placeholder="Course description..."></textarea>
+                                    <textarea id="description" name="description" className="" placeholder="Course description..." onChange={this.onChange}></textarea>
                                 </div>
                             </div>
                         </div>
@@ -40,13 +50,13 @@ class CreateCourse extends Component {
                                     <li className="course--stats--list--item">
                                         <h4>Estimated Time</h4>
                                         <div>
-                                            <input id="estimatedTime" name="estimatedTime" type="text" className="course--time--input" placeholder="Hours" value=""/>
+                                            <input id="estimatedTime" name="estimatedTime" type="text" className="course--time--input" placeholder="Hours" onChange={this.onChange}/>
                                         </div>
                                     </li>
                                     <li className="course--stats--list--item">
                                         <h4>Materials Needed</h4>
                                         <div>
-                                            <textarea id="materialsNeeded" name="materialsNeeded" className="" placeholder="List materials..."></textarea>
+                                            <textarea id="materialsNeeded" name="materialsNeeded" className="" placeholder="List materials..." onChange={this.onChange}></textarea>
                                         </div>
                                     </li>
                                 </ul>
