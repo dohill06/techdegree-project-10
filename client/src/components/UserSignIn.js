@@ -24,7 +24,7 @@ class UserSignIn extends Component {
     };
 
     render() {
-        const { from } = this.props.location.state || { from: { pathname: '/' } };
+        const { from } = this.props.location.state;
         return (
             <Consumer>
                 {({ actions, user }) => 
