@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
+import { Consumer } from './Context';
 import axios from 'axios';
 
 
@@ -21,8 +22,9 @@ class CourseDetail extends Component {
             const { course } = res.data;
             this.setState({
                 course,
-                user: `${course.User.firstName} ${course.User.lastName}`
+                user: `${course.User.firstName} ${course.User.lastName}`                
             });
+            console.log(this.state)
         })
     };
 
@@ -32,10 +34,19 @@ class CourseDetail extends Component {
                 <div className="actions--bar">
                     <div className="bounds">
                         <div className="grid-100">
-                        <span>
-                            <Link className="button" to={`/courses/${this.state.course.id}/update`}>Update Course</Link>
-                            <Link className="button" to="delete-course.html">Delete Course</Link>
-                        </span>                        
+                        <Consumer>
+                            {({ user }) =>
+                                user.id && user.id === this.state.course.userId
+                                ? (
+                                    <span>
+                                        <Link className="button" to={`/courses/${this.state.course.id}/update`}>Update Course</Link>
+                                        <Link className="button" to="delete-course.html">Delete Course</Link>
+                                    </span>
+                                ) : (
+                                    ''
+                                )
+                            }       
+                        </Consumer>                        
                         <Link className="button button-secondary" to='/'>Return to List</Link>
                         </div>
                     </div>
