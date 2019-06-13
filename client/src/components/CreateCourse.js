@@ -5,14 +5,57 @@ import axios from 'axios';
 
 
 class CreateCourse extends Component {
+    state = {
+        title: '',
+        description: '',
+        estimatedTime: null,
+        materialsNeeded: null,
+        error: {}
+    }
 
+    createCourse = user => {
+        const {
+            title,
+            description,
+            estimatedTime,
+            materialsNeeded
+        } = this.state;
+        const {
+            emailAddress,
+            password,
+            id
+        } = user;
+        axios.post('http://localhost:5000/api/courses', {
+            data: {
+                title,
+                description,
+                estimatedTime,
+                materialsNeeded,
+                userId: id
+            },
+            auth: {
+                username: emailAddress,
+                password
+            }
+        }).then(() => {
+            this.props.history.push('/');
+        }).catch(err => {
+            console.log(err);
+        });
+    };
 
     onChange = e => {
     const { name, value } = e.target;
-    // this.setState({
-    //     [name]: value
-    // });
+    this.setState({
+        [name]: value
+    });
     console.log(name, value);
+    };
+
+    onSubmit = (e, user) => {
+        e.preventDefault();
+        this.createCourse(user);
+        console.log(user.password);
     };
 
     render() {
@@ -29,44 +72,48 @@ class CreateCourse extends Component {
                             </ul>
                         </div>
                     </div>
-                    <form>
-                        <div className="grid-66">
-                            <div className="course--header">
-                                <h4 className="course--label">Course</h4>
-                                <div>
-                                    <input id="title" name="title" type="text" className="input-title course--title--input" placeholder="Course title..." onChange={this.onChange}/>
-                                </div>
-                                <p>By Joe Smith</p>
-                            </div>
-                            <div className="course--description">
-                                <div>
-                                    <textarea id="description" name="description" className="" placeholder="Course description..." onChange={this.onChange}></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="grid-25 grid-right">
-                            <div className="course--stats">
-                                <ul className="course--stats--list">
-                                    <li className="course--stats--list--item">
-                                        <h4>Estimated Time</h4>
+                    <Consumer>
+                        {({ user }) => (
+                            <form onSubmit={e => {this.onSubmit(e, user)}}>
+                                <div className="grid-66">
+                                    <div className="course--header">
+                                        <h4 className="course--label">Course</h4>
                                         <div>
-                                            <input id="estimatedTime" name="estimatedTime" type="text" className="course--time--input" placeholder="Hours" onChange={this.onChange}/>
+                                            <input id="title" name="title" type="text" className="input-title course--title--input" placeholder="Course title..." onChange={this.onChange}/>
                                         </div>
-                                    </li>
-                                    <li className="course--stats--list--item">
-                                        <h4>Materials Needed</h4>
+                                        <p>{`By ${user.firstName} ${user.lastName}`}</p>
+                                    </div>
+                                    <div className="course--description">
                                         <div>
-                                            <textarea id="materialsNeeded" name="materialsNeeded" className="" placeholder="List materials..." onChange={this.onChange}></textarea>
+                                            <textarea id="description" name="description" className="" placeholder="Course description..." onChange={this.onChange}></textarea>
                                         </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div className="grid-100 pad-bottom">
-                            <button className="button" type="submit">Create Course</button>
-                            <Link className="button button-secondary" to='/'>Cancel</Link>
-                        </div>
-                    </form>
+                                    </div>
+                                </div>
+                                <div className="grid-25 grid-right">
+                                    <div className="course--stats">
+                                        <ul className="course--stats--list">
+                                            <li className="course--stats--list--item">
+                                                <h4>Estimated Time</h4>
+                                                <div>
+                                                    <input id="estimatedTime" name="estimatedTime" type="text" className="course--time--input" placeholder="Hours" onChange={this.onChange}/>
+                                                </div>
+                                            </li>
+                                            <li className="course--stats--list--item">
+                                                <h4>Materials Needed</h4>
+                                                <div>
+                                                    <textarea id="materialsNeeded" name="materialsNeeded" className="" placeholder="List materials..." onChange={this.onChange}></textarea>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div className="grid-100 pad-bottom">
+                                    <button className="button" type="submit">Create Course</button>
+                                    <Link className="button button-secondary" to='/'>Cancel</Link>
+                                </div>
+                            </form>
+                        )}
+                    </Consumer>
                 </div>
             </div>
         )
