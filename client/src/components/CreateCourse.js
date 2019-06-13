@@ -26,16 +26,16 @@ class CreateCourse extends Component {
             id
         } = user;
         axios.post('http://localhost:5000/api/courses', {
+            auth: {
+                username: emailAddress,
+                password
+            },
             data: {
                 title,
                 description,
                 estimatedTime,
                 materialsNeeded,
                 userId: id
-            },
-            auth: {
-                username: emailAddress,
-                password
             }
         }).then(() => {
             this.props.history.push('/');
