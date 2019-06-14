@@ -17,11 +17,11 @@ router.get('/', authenticateUser, (req, res) => {
 router.post('/', (req, res, next) => {
     const user = req.body;
 
-    if (!user.emailAddress) {
-        const err = new Error('All fields are required');
-        err.status = 400;
-        next(err);
-    } else {
+    // if (!user.emailAddress) {
+    //     const err = new Error('All fields are required');
+    //     err.status = 400;
+    //     next(err);
+    // } else {
         User.findOne({
                 where: {
                     emailAddress: user.emailAddress
@@ -53,7 +53,7 @@ router.post('/', (req, res, next) => {
             }).catch(err => {
                 next(err);
             });
-    }
+    // }
 });
 
 

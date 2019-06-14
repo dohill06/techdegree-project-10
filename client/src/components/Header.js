@@ -18,7 +18,7 @@ const Header = (props) => {
                             </>
                         ) : (
                             <>
-                            <Link className="signup" to={{pathname: '/signup', state: { from: props.location }}}>Sign Up</Link>
+                            <Link className="signup" to='/signup'>Sign Up</Link>
                             <Link className="signin" to={{pathname: '/signin', state: { from: props.location }}}>Sign In</Link>
                             </>
                         )}
