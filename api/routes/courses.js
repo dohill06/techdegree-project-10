@@ -112,16 +112,10 @@ router.post('/', authenticateUser, (req, res, next) => {
 });
 // Update course with authentication and validate fields
 router.put('/:id', authenticateUser, (req, res, next) => {
-    const input = req.body;
 
-    if (!input.id) {
-        const err = new Error('All fields are required');
-        err.status = 400;
-        next(err);
-    } else {
         Course.findOne({
             where: {
-                id: input.id
+                id: req.params.id
             }
         }).then(course => {
             if (course.userId !== req.currentUser.id) {
@@ -133,7 +127,7 @@ router.put('/:id', authenticateUser, (req, res, next) => {
                 err.status = 404;
                 next(err);
             } else {
-                course.update(input)
+                course.update(req.body)
                     .then(() => {
                         res.status(204).end();
                     }).catch(err => {
@@ -150,7 +144,6 @@ router.put('/:id', authenticateUser, (req, res, next) => {
         }).catch(err => {
             next(err);
         });
-    }
 });
 // Delete course with authentication
 router.delete('/:id', authenticateUser, (req, res, next) => {
