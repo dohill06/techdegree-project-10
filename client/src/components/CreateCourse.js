@@ -8,8 +8,8 @@ class CreateCourse extends Component {
     state = {
         title: '',
         description: '',
-        estimatedTime: null,
-        materialsNeeded: null,
+        estimatedTime: '',
+        materialsNeeded: '',
         error: {}
     }
 
