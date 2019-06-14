@@ -43,7 +43,7 @@ class CreateCourse extends Component {
         }).then(() => {
             this.props.history.push('/');
         }).catch(err => {
-            console.log(err);
+            console.log(err.response);
         });
     };
 

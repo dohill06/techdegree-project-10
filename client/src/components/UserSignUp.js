@@ -32,7 +32,7 @@ class UserSignUp extends Component {
                         </form>
                     </div>
                     <p>&nbsp;</p>
-                    <p>Already have a user account? <Link to='/signin'>Click here</Link> to sign in!</p>
+                    <p>Already have a user account? <Link to={{pathname: '/signin', state: { from: this.props.location }}}>Click here</Link> to sign in!</p>
                 </div>
             </div>
         )
