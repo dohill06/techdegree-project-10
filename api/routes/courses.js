@@ -73,11 +73,6 @@ router.get('/:id', (req, res, next) => {
 router.post('/', authenticateUser, (req, res, next) => {
     const input = req.body;
 
-    if (!input.title) {
-        const err = new Error('All fields are required');
-        err.status = 400;
-        next(err);
-    } else {
         Course.findOne({
             where: {
                 title: input.title
@@ -108,7 +103,6 @@ router.post('/', authenticateUser, (req, res, next) => {
         }).catch(err => {
             next(err);
         });
-    }
 });
 // Update course with authentication and validate fields
 router.put('/:id', authenticateUser, (req, res, next) => {

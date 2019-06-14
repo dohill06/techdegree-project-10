@@ -23,7 +23,6 @@ class CreateCourse extends Component {
         const {
             emailAddress,
             password,
-            id
         } = user;
         console.log(emailAddress)
         axios({
@@ -38,7 +37,6 @@ class CreateCourse extends Component {
                 description,
                 estimatedTime,
                 materialsNeeded,
-                userId: id
             }
         }).then(() => {
             this.props.history.push('/');
