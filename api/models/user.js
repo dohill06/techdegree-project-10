@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
             validate: {
                 notEmpty: {
                     msg: 'First name is required'
-                },
+                }
             }
         },
         lastName: {
@@ -21,16 +21,13 @@ module.exports = (sequelize, DataTypes) => {
             validate: {
                 notEmpty: {
                     msg: 'Last name is required'
-                },
+                }
             }
         },
         emailAddress: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                notEmpty: {
-                    msg: 'Valid email required'
-                },
                 isEmail: {
                     msg: 'Valid email required'
                 }

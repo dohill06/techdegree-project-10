@@ -40,7 +40,9 @@ export class Provider extends Component {
                 ...res.data,
                 password
             }))
-        })
+        }).catch(err => {
+            console.log(err.response);
+        });
     };
 
     signOut = () => {

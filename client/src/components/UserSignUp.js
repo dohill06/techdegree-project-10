@@ -34,6 +34,8 @@ class UserSignUp extends Component {
             this.props.history.push('/');
         }).catch(err => {
             console.log(err.response);
+            console.log(err.response.status);
+            console.log(err.response.data.message)
         });
     }
 
