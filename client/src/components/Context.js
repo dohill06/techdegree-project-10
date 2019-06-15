@@ -5,7 +5,20 @@ export const Context = React.createContext();
 
 export class Provider extends Component {
     state = {
-        user: JSON.parse(localStorage.getItem('user'))
+        user: {}
+    };
+
+    componentDidMount() {
+        this.checkStorage();
+    }
+
+    checkStorage = () => {
+        const storage = localStorage.getItem('user')
+        if (storage !== null) {
+            this.setState({
+                user: JSON.parse(localStorage.getItem('user'))
+            });
+        } 
     };
 
     signIn = (emailAddress, password) => {
@@ -23,7 +36,7 @@ export class Provider extends Component {
             });
             console.log(this.state)
             console.log(res.status)
-            window.localStorage.setItem('user', JSON.stringify({
+            localStorage.setItem('user', JSON.stringify({
                 ...res.data,
                 password
             }))
@@ -34,7 +47,7 @@ export class Provider extends Component {
         this.setState({
             user: {}
         });
-        window.localStorage.removeItem('user');
+        localStorage.clear();
     };
 
     render() {
