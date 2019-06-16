@@ -5,7 +5,8 @@ export const Context = React.createContext();
 
 export class Provider extends Component {
     state = {
-        user: {}
+        user: {},
+        validationErrors: []
     };
 
     componentDidMount() {
@@ -41,7 +42,9 @@ export class Provider extends Component {
                 password
             }))
         }).catch(err => {
-            console.log(err.response);
+            this.setState({
+                validationErrors: err.response.data.message
+            })
         });
     };
 
@@ -53,9 +56,11 @@ export class Provider extends Component {
     };
 
     render() {
+        const { user, validationErrors } = this.state;
         return (
             <Context.Provider value={{
-                user: this.state.user,
+                user: user,
+                validationErrors: validationErrors,
                 actions: {
                     signIn: this.signIn,
                     signOut: this.signOut

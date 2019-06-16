@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { Consumer } from './Context';
+import ValidationErrors from './ValidationErrors'
 
 class UserSignIn extends Component {
     state = {
@@ -27,13 +28,17 @@ class UserSignIn extends Component {
         const { from } = this.props.location.state || { from: { pathname: '/' } };
         return (
             <Consumer>
-                {({ actions, user }) => 
+                {({ actions, user, validationErrors }) => 
                     user.id ? (
                         <Redirect to={from} />
                     ) : (                    
                         <div className="bounds">
                             <div className="grid-33 centered signin">
                                 <h1>Sign In</h1>
+                                {validationErrors.length === 0 ?
+                                    ('') :
+                                (<ValidationErrors errors={validationErrors} />)
+                                }
                                 <div>
                                     <form onSubmit={e => {this.onSubmit(e, actions.signIn)}}>
                                         <div>
