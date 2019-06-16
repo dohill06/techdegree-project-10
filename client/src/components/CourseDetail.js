@@ -12,10 +12,12 @@ class CourseDetail extends Component {
         user: ''
     };
 
+// fire off methods at mount
     componentDidMount() {
         this.getCourse();
     };
 
+// method to retrieve course
     getCourse = () => {
         axios.get(`http://localhost:5000/api/courses/${this.props.match.params.id}`)
         .then(res => {
@@ -30,10 +32,10 @@ class CourseDetail extends Component {
             } else if (err.response.status === 500) {
                 this.props.history.push('/error');
             }
-            console.log(err.response.status)
         });
     };
 
+// method to delete course
     deleteCourse = (user) => {
         const { emailAddress, password } = user;
         axios({
@@ -46,10 +48,13 @@ class CourseDetail extends Component {
         }).then(() => {
             this.props.history.push('/');
         }).catch(err => {
-            console.log(err);
+            if (err.response.status === 500) {
+                this.props.history.push('/error');
+            }
         });
     };
 
+// render with conditional action bar handling
     render() {
         return (
             <div>
