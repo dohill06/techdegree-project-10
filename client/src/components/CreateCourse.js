@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Consumer } from './Context';
 import axios from 'axios';
+import ValidationErrors from './ValidationErrors'
 
 
 class CreateCourse extends Component {
@@ -10,7 +11,7 @@ class CreateCourse extends Component {
         description: '',
         estimatedTime: '',
         materialsNeeded: '',
-        error: {}
+        validationErrors: []
     }
 
     createCourse = user => {
@@ -41,7 +42,9 @@ class CreateCourse extends Component {
         }).then(() => {
             this.props.history.push('/');
         }).catch(err => {
-            console.log(err.response);
+            this.setState({
+                validationErrors: err.response.data.message
+            })
         });
     };
 
@@ -64,15 +67,10 @@ class CreateCourse extends Component {
             <div className="bounds course--detail">
                 <h1>Create Course</h1>
                 <div>
-                    <div>
-                        <h2 className="validation--errors--label">Validation errors</h2>
-                        <div className="validation-errors">
-                            <ul>
-                                <li>Please provide a value for "Title"</li>
-                                <li>Please provide a value for "Description"</li>
-                            </ul>
-                        </div>
-                    </div>
+                    {this.state.validationErrors.length === 0 ?
+                        ('') :
+                    (<ValidationErrors errors={this.state.validationErrors} />)
+                    }
                     <Consumer>
                         {({ user }) => (
                             <form onSubmit={e => {this.onSubmit(e, user)}}>
