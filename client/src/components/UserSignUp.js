@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import { Consumer } from './Context';
 import axios from 'axios';
+import ValidationErrors from './ValidationErrors'
 
 class UserSignUp extends Component {
     state = {
@@ -9,16 +10,18 @@ class UserSignUp extends Component {
         lastName: '',
         emailAddress: '',
         password: '',
-        confirmPassword: ''
+        confirmPassword: '',
+        validationErrors: []
     }
+    
 
     signUp = (e, signIn) => {
         e.preventDefault();
         const { firstName,
                 lastName,
                 emailAddress,
-                password 
-        } = this.state;
+                password,
+        } = this.state;        
         axios({
             method: 'post',
             url: 'http://localhost:5000/api/users',
@@ -33,11 +36,15 @@ class UserSignUp extends Component {
         }).then(() => {
             this.props.history.push('/');
         }).catch(err => {
-            console.log(err.response);
-            console.log(err.response.status);
-            console.log(err.response.data.message)
+            this.setState({
+                validationErrors: err.response.data.message
+            })
+            // console.log(err.response);
+            // console.log(err.response.status);
+            // console.log(err.response.data.message)
+            console.log(this.state.validationErrors)  
         });
-    }
+    };
 
     onChange = e => {
     const { name, value } = e.target;
@@ -52,6 +59,10 @@ class UserSignUp extends Component {
             <div className="bounds">
                 <div className="grid-33 centered signin">
                     <h1>Sign Up</h1>
+                    {this.state.validationErrors.length === 0 ?
+                        '' :
+                    <ValidationErrors errors={this.state.validationErrors} />
+                    }
                     <div>
                         <Consumer>
                         {({ actions }) => (
@@ -72,8 +83,17 @@ class UserSignUp extends Component {
                                     <input id="confirmPassword" name="confirmPassword" type="password" className="" placeholder="Confirm Password" onChange={this.onChange}/>
                                 </div>
                                 <div className="grid-100 pad-bottom">
+                                {this.state.password === this.state.confirmPassword ? 
+                                (<>
                                     <button className="button" type="submit">Sign Up</button>
                                     <Link className="button button-secondary" to='/'>Cancel</Link>
+                                </>)
+                                    :
+                                (<>                                     
+                                    <Link className="button button-secondary" to='/'>Cancel</Link>
+                                    <span><b>Confirm Password</b></span>
+                                </>)
+                                }
                                 </div>
                             </form>
                         )}
