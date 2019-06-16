@@ -8,10 +8,12 @@ class Courses extends Component{
         courses: []
     };
 
+// fire off methods at mount
     componentDidMount() {
         this.getCourses();
     };
 
+// method to retrieve all courses
     getCourses = () => {
         axios.get('http://localhost:5000/api/courses')
         .then(res => {

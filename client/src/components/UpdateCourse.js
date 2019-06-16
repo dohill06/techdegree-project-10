@@ -5,7 +5,7 @@ import axios from 'axios';
 import ValidationErrors from './ValidationErrors'
 
 class UpdateCourse extends Component {
-    
+
     state = {
         title: '',
         description: '',
@@ -15,7 +15,7 @@ class UpdateCourse extends Component {
         user: {}
     };
 
-// fire off methodss at mount
+// fire off methods at mount
     componentDidMount() {
         const { user } = this.context;
         this.setState({ user });
