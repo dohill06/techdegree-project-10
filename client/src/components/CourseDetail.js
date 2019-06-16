@@ -24,8 +24,14 @@ class CourseDetail extends Component {
                 course,
                 user: `${course.User.firstName} ${course.User.lastName}`                
             });
-            console.log(this.state)
-        })
+        }).catch(err => {
+            if (err.response.status === 404) {
+                this.props.history.push('/notfound');
+            } else if (err.response.status === 500) {
+                this.props.history.push('/error');
+            }
+            console.log(err.response.status)
+        });
     };
 
     deleteCourse = (user) => {
