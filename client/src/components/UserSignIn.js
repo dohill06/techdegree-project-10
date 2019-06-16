@@ -4,26 +4,28 @@ import { Consumer } from './Context';
 import ValidationErrors from './ValidationErrors'
 
 class UserSignIn extends Component {
+
     state = {
         emailAddress: '',
         password: ''
     };
 
-
+// method to take in user input
     onChange = e => {
         const { name, value } = e.target;
         this.setState({
             [name]: value
         });
-        console.log(name, value);
     };
 
+// method to submit form
     onSubmit = (e, signIn) => {
         const { emailAddress, password } = this.state;
         e.preventDefault();
         signIn(emailAddress, password);
     };
 
+// render with conditional validation error handling
     render() {
         const { from } = this.props.location.state || { from: { pathname: '/' } };
         return (
