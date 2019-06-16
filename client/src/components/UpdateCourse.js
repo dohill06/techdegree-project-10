@@ -39,8 +39,6 @@ class UpdateCourse extends Component {
                     estimatedTime,
                     materialsNeeded
                 });
-                console.log(res.data);
-                console.log(this.state);
             } else {
                 this.props.history.push('/forbidden');
             }
@@ -96,7 +94,6 @@ class UpdateCourse extends Component {
         this.setState({
             [name]: value
         });
-        console.log(name, value);
     };
 
 // method to submit form
