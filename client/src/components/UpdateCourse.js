@@ -5,6 +5,7 @@ import axios from 'axios';
 import ValidationErrors from './ValidationErrors'
 
 class UpdateCourse extends Component {
+    
     state = {
         title: '',
         description: '',
@@ -12,7 +13,7 @@ class UpdateCourse extends Component {
         materialsNeeded: '',
         validationErrors: [],
         user: {}
-    }
+    };
 
 // fire off methodss at mount
     componentDidMount() {
