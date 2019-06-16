@@ -35,7 +35,11 @@ class UpdateCourse extends Component {
             console.log(res.data);
             console.log(this.state);
         }).catch(err => {
-            console.log(err.response);
+            if (err.response.status === 404) {
+                this.props.history.push('/notfound');
+            } else if (err.response.status === 500) {
+                this.props.history.push('/error');
+            }
         })
     };
 
