@@ -14,6 +14,7 @@ class CreateCourse extends Component {
         validationErrors: []
     }
 
+// method to create course
     createCourse = user => {
         const {
             title,
@@ -25,7 +26,6 @@ class CreateCourse extends Component {
             emailAddress,
             password,
         } = user;
-        console.log(emailAddress)
         axios({
             method: 'post',
             url: 'http://localhost:5000/api/courses',
@@ -48,20 +48,21 @@ class CreateCourse extends Component {
         });
     };
 
+// method to take in user input
     onChange = e => {
-    const { name, value } = e.target;
-    this.setState({
-        [name]: value
-    });
-    console.log(name, value);
+        const { name, value } = e.target;
+        this.setState({
+            [name]: value
+        });
     };
 
+// method to submit form
     onSubmit = (e, user) => {
         e.preventDefault();
         this.createCourse(user);
-        console.log(user.password);
     };
 
+// render with conditional validation error handling
     render() {
         return (
             <div className="bounds course--detail">
