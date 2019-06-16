@@ -5,6 +5,7 @@ import axios from 'axios';
 import ValidationErrors from './ValidationErrors'
 
 class UserSignUp extends Component {
+
     state = {
         firstName: '',
         lastName: '',
@@ -12,9 +13,9 @@ class UserSignUp extends Component {
         password: '',
         confirmPassword: '',
         validationErrors: []
-    }
+    };
     
-
+// method to sign new user up and then sign in
     signUp = (e, signIn) => {
         e.preventDefault();
         const { firstName,
@@ -39,22 +40,18 @@ class UserSignUp extends Component {
             this.setState({
                 validationErrors: err.response.data.message
             })
-            // console.log(err.response);
-            // console.log(err.response.status);
-            // console.log(err.response.data.message)
-            console.log(this.state.validationErrors)  
         });
     };
 
+// method to take in user input
     onChange = e => {
         const { name, value } = e.target;
         this.setState({
             [name]: value
         });
-        console.log(name, value);
     };
     
-
+// render with conditional validation error handling
     render() {
         return (
             <div className="bounds">
