@@ -4,15 +4,18 @@ import axios from 'axios';
 export const Context = React.createContext();
 
 export class Provider extends Component {
+
     state = {
         user: {},
         validationErrors: []
     };
 
+// fire off methods at mount
     componentDidMount() {
         this.checkStorage();
     }
 
+// check to see if localStorage contains anything and if it does update state with contents
     checkStorage = () => {
         const storage = localStorage.getItem('user')
         if (storage !== null) {
@@ -22,6 +25,7 @@ export class Provider extends Component {
         } 
     };
 
+// method to sign in user and put in localStorage
     signIn = (emailAddress, password) => {
         axios.get('http://localhost:5000/api/users', {
             auth: {
@@ -35,8 +39,7 @@ export class Provider extends Component {
                     password
                 }
             });
-            console.log(this.state)
-            console.log(res.status)
+
             localStorage.setItem('user', JSON.stringify({
                 ...res.data,
                 password
@@ -48,6 +51,7 @@ export class Provider extends Component {
         });
     };
 
+// method to sign out user and remove from localStorage
     signOut = () => {
         this.setState({
             user: {}
