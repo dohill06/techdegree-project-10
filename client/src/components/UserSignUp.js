@@ -61,8 +61,8 @@ class UserSignUp extends Component {
                 <div className="grid-33 centered signin">
                     <h1>Sign Up</h1>
                     {this.state.validationErrors.length === 0 ?
-                        '' :
-                    <ValidationErrors errors={this.state.validationErrors} />
+                        ('') :
+                    (<ValidationErrors errors={this.state.validationErrors} />)
                     }
                     <div>
                         <Consumer>
