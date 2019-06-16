@@ -10,11 +10,19 @@ class UpdateCourse extends Component {
         description: '',
         estimatedTime: '',
         materialsNeeded: '',
-        validationErrors: []
+        validationErrors: [],
+        user: {}
     }
 
     componentDidMount() {
         this.getCourse();
+        this.checkStorage();
+    };
+
+    checkStorage = () => {
+        this.setState({
+            user: JSON.parse(localStorage.getItem('user'))
+        });
     };
 
     getCourse = () => {
@@ -24,16 +32,21 @@ class UpdateCourse extends Component {
                 title,
                 description,
                 estimatedTime,
-                materialsNeeded
+                materialsNeeded,
+                userId
             } = res.data.course;
-            this.setState({
-                title,
-                description,
-                estimatedTime,
-                materialsNeeded
-            });
-            console.log(res.data);
-            console.log(this.state);
+            if (userId === this.state.user.id) {
+                this.setState({
+                    title,
+                    description,
+                    estimatedTime,
+                    materialsNeeded
+                });
+                console.log(res.data);
+                console.log(this.state);
+            } else {
+                this.props.history.push('/forbidden');
+            }
         }).catch(err => {
             if (err.response.status === 404) {
                 this.props.history.push('/notfound');
@@ -151,5 +164,6 @@ class UpdateCourse extends Component {
         )
     };
 }
+
 
 export default UpdateCourse;

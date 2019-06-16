@@ -18,6 +18,7 @@ import UserSignOut from './components/UserSignOut';
 import PrivateRoute from './components/PrivateRoute';
 import NotFound from './components/NotFound';
 import UnhandledError from './components/UnhandledError';
+import Forbidden from './components/Forbidden';
 
 const App = () => (
     <BrowserRouter>
@@ -32,6 +33,7 @@ const App = () => (
                 <Route path='/signup' component={UserSignUp} />
                 <Route path='/signout' component={UserSignOut} />
                 <Route path='/error' component={UnhandledError} />
+                <Route path='/forbidden' component={Forbidden} />
                 <Route path='/notfound' component={NotFound} />
                 <Route component={NotFound} />
             </Switch>
