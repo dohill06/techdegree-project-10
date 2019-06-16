@@ -6,13 +6,14 @@ import ValidationErrors from './ValidationErrors'
 
 
 class CreateCourse extends Component {
+    
     state = {
         title: '',
         description: '',
         estimatedTime: '',
         materialsNeeded: '',
         validationErrors: []
-    }
+    };
 
 // method to create course
     createCourse = user => {
