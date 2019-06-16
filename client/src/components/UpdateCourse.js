@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Consumer } from './Context';
+import { Consumer, Context } from './Context';
 import axios from 'axios';
 import ValidationErrors from './ValidationErrors'
 
@@ -14,18 +14,15 @@ class UpdateCourse extends Component {
         user: {}
     }
 
+// fire off methodss at mount
     componentDidMount() {
+        const { user } = this.context;
+        this.setState({ user });
         this.getCourse();
-        this.checkStorage();
     };
 
-    checkStorage = () => {
-        this.setState({
-            user: JSON.parse(localStorage.getItem('user'))
-        });
-    };
-
-    getCourse = () => {
+// method to retrieve course to be updated if course owner
+    getCourse = async () => {
         axios.get(`http://localhost:5000/api/courses/${this.props.match.params.id}`)
         .then(res => {
             const {
@@ -53,9 +50,10 @@ class UpdateCourse extends Component {
             } else if (err.response.status === 500) {
                 this.props.history.push('/error');
             }
-        })
+        });
     };
 
+// method to update course if course owner
     updateCourse = user => {
         const {
             title,
@@ -85,10 +83,11 @@ class UpdateCourse extends Component {
         }).catch(err => {
             this.setState({
                 validationErrors: err.response.data.message
-            })
+            });
         });
     };    
 
+// method to take in user input
     onChange = e => {
         const {
             name,
@@ -100,11 +99,13 @@ class UpdateCourse extends Component {
         console.log(name, value);
     };
 
+// method to submit form
     onSubmit = (e, user) => {
         e.preventDefault();
         this.updateCourse(user);
     };
 
+// render with conditional validation error handling
     render() {
         const { title, description, estimatedTime, materialsNeeded } = this.state;
         return (
@@ -165,5 +166,7 @@ class UpdateCourse extends Component {
     };
 }
 
+// Context for lifecycle method
+UpdateCourse.contextType = Context;
 
 export default UpdateCourse;

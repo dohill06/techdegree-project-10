@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 
 
-
+// import all needed components
 import Header from './components/Header';
 import Courses from './components/Courses';
 import CourseDetail from './components/CourseDetail';
@@ -20,6 +20,7 @@ import NotFound from './components/NotFound';
 import UnhandledError from './components/UnhandledError';
 import Forbidden from './components/Forbidden';
 
+// set up routes
 const App = () => (
     <BrowserRouter>
         <div>
