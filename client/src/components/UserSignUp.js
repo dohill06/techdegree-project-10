@@ -47,12 +47,13 @@ class UserSignUp extends Component {
     };
 
     onChange = e => {
-    const { name, value } = e.target;
-    this.setState({
-        [name]: value
-    });
-    console.log(name, value);
+        const { name, value } = e.target;
+        this.setState({
+            [name]: value
+        });
+        console.log(name, value);
     };
+    
 
     render() {
         return (
